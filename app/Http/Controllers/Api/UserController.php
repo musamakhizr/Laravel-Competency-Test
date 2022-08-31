@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\NewUserCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -17,7 +18,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        return User::create($request->only(['name', 'email']));
+        $user = User::create($request->only(['name', 'email']));
+        $result = event(new NewUserCreated($user) );
+
+        return  ["result" => $result];
+
     }
 
     public function show($id)

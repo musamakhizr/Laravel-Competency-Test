@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Resources\UserResource;
+use App\Models\Department;
 use App\Models\UserDepartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,6 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::apiResource('users', UserController::class);
-Route::get('user', function (){
-    return UserDepartment::all();
+Route::get('test', function (){
+    dd( Department::all()->random());
 });
